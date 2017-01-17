@@ -33,7 +33,7 @@ class Rest_Blog_Data {
 
 		add_action( 'rest_api_init', function () {
 			// "domains" argument should contain comma separated domains list.
-			register_rest_route( self::REST_NAMESPACE, self::REST_NAMESPACE . 'P<domains>((([a-z\d]([a-z\d\-]{0,61}[a-z\d])?\.)+[a-z]{2,6}),?)+)', array(
+			register_rest_route( self::REST_NAMESPACE, self::REST_ROUTE_PREFIX . '(?P<domains>((([a-z\d]([a-z\d\-]{0,61}[a-z\d])?\.)+[a-z]{2,6}),?)+)', array(
 				'methods'  => 'GET',
 				'callback' => array( $this, 'rest_blog_data' ),
 				'args'     => array(
