@@ -88,6 +88,8 @@ class Blog {
 			$data[ $field ] = $this->{$field};
 		}
 
+		$data['is_external'] = true;
+
 		return $data;
 	}
 

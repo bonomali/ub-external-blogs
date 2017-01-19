@@ -18,7 +18,11 @@ namespace UB\External_Blogs;
  */
 class External_Blogs {
 
-	public function get_external_blogs( $domains = array() ) {
+	public function get_blogs( array $domains ) {
+
+		if ( ! $domains ) {
+			return array();
+		}
 
 		$blogs = array();
 		$remote_urls = $this->get_remote_urls();
@@ -27,7 +31,6 @@ class External_Blogs {
 				$blogs = $this->request( $endpoint, $domains );
 			}
 		}
-
 
 		return $blogs;
 	}
