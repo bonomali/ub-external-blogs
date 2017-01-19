@@ -40,11 +40,25 @@ class Blog {
 	private $siteurl;
 
 	/**
+	 * Blog image url.
+	 *
+	 * @var string
+	 */
+	private $blog_img;
+
+	/**
+	 * Top list exclude status.
+	 *
+	 * @var string
+	 */
+	private $top_list_exclude_status;
+
+	/**
 	 * Class fields that can be get via self::get_data() method.
 	 *
 	 * @var array
 	 */
-	private $accessible_fields = array( 'id', 'blogname', 'siteurl' );
+	private $accessible_fields = array( 'id', 'blogname', 'siteurl', 'blog_img', 'top_list_exclude_status' );
 
 	/**
 	 * Constructor.
@@ -68,9 +82,12 @@ class Blog {
 		switch_to_blog( $this->id );
 
 		// TODO: Add image option to Settings.
+		$settings = Settings::get_instance();
 
+		$this->blog_img = $settings->get_blog_image_url();
+		$this->top_list_exclude_status = $settings->get_top_list_exclude_status();
 		$this->blogname = get_blog_option( $this->id, 'blogname' );
-		$this->siteurl  = get_blog_option( $this->id, 'home' );
+		$this->siteurl = get_blog_option( $this->id, 'home' );
 
 		restore_current_blog();
 	}

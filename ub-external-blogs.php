@@ -22,6 +22,7 @@ require_once __DIR__ . '/includes/class-rest-blog-data.php';
 require_once __DIR__ . '/includes/class-blogs_list.php';
 require_once __DIR__ . '/includes/class-blog.php';
 require_once __DIR__ . '/includes/class-external-blogs.php';
+require_once __DIR__ . '/includes/class-settings.php';
 
 /**
  * Returns path to initial file of this plugin.
@@ -33,3 +34,4 @@ function get_path_to_plugin_file() {
 }
 
 new Rest_Blog_Data();
+Settings::get_instance();
