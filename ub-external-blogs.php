@@ -12,7 +12,7 @@
  * Plugin Name: External blogs
  * Description: This plugin provides an ability to get common info about the remote blogs using REST API.
  * Author: Victor Bairak
- * Version: 0.1
+ * Version: 0.1.1
  * Network: true
  */
 

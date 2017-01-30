@@ -26,18 +26,18 @@ class Settings {
 	public static $instance;
 
 	/**
-	 * Global prefix for metabox.
+	 * Global prefix for fields in metabox.
 	 *
 	 * @var string
 	 */
-	protected $prefix = 'ub_external_blogs_options_';
+	protected $prefix = 'basic_';
 
 	/**
-	 * Option key, and option slug
+	 * As CMB2 has no support of working with same option-keys on different blogs (during switching between them), key for blog-option is based on self::key_prefix and current blog id.
 	 *
 	 * @var string
 	 */
-	protected $key = 'ub_external_blogs_options';
+	protected $key_prefix = 'ub_external_blogs_options_';
 
 	/**
 	 * Options page metabox id
@@ -88,6 +88,22 @@ class Settings {
 	}
 
 	/**
+	 * Getter.
+	 *
+	 * @param string $name Property name
+	 *
+	 * @return void
+	 */
+	public function __get( $name ) {
+
+		if ( 'key' === $name ) {
+			return $this->key_prefix . get_current_blog_id();
+		}
+
+		return null;
+	}
+
+	/**
 	 * Register our setting to WP
 	 *
 	 * @since  0.1.0
@@ -104,7 +120,7 @@ class Settings {
 	public function add_options_page() {
 		$this->options_page = add_menu_page( $this->title, $this->title, 'manage_options', $this->key, array( $this, 'admin_page_display' ) );
 
-		// Include CMB CSS in the head to avoid FOUT
+		// Include CMB CSS in the head to avoid FOUT.
 		add_action( "admin_print_styles-{$this->options_page}", array( 'CMB2_hookup', 'enqueue_cmb_css' ) );
 	}
 
